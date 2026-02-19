@@ -1,0 +1,137 @@
+// *mixin*
+// POSITION
+@mixin position-center($position: absolute) {
+  @if ($position == absolute or $position == fixed) {
+    position: $position;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin position-center-x($position: absolute) {
+  @if ($position == absolute or $position == fixed) {
+    position: $position;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@mixin position-center-y($position: absolute) {
+  @if ($position == absolute or $position == fixed) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+// FLOAT
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+// FLEXBOX
+$flex: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  baseline: baseline,
+  center: center,
+);
+
+@mixin flex-box($jc: center, $ai: center, $fd: false) {
+  display: flex;
+  justify-content: get-flex-val($jc);
+  align-items: get-flex-val($ai);
+  @if ($fd) {
+    flex-direction: $fd;
+  }
+  @content;
+}
+
+@mixin inline-flex($jc: center, $ai: center) {
+  display: inline-flex;
+  justify-content: get-flex-val($jc);
+  align-items: get-flex-val($ai);
+}
+
+// WIDTH, HEIGHT
+@mixin wh($w-val: auto, $h-val: auto) {
+  width: $w-val;
+  height: $h-val;
+}
+
+// ELLIPSIS
+@mixin ellipsis($line: 1) {
+  @if ($line == 1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+  }
+}
+
+// BUTTON RESET
+@mixin reset-btn($color: #000, $bg-color: none) {
+  padding: 0;
+  border: none;
+  outline: none;
+  color: $color;
+  background: $bg-color;
+}
+
+// BACKGROUND
+@mixin reset-bg($rep: no-repeat, $size: cover, $pos: center) {
+  background: {
+    repeat: $rep;
+    size: $size;
+    position: $pos;
+  }
+}
+
+// FONT
+@mixin font($size, $fw: false, $lh: false) {
+  font-size: toRem($size);
+  @if ($fw) {
+    font-weight: $fw;
+  }
+  @if ($lh) {
+    line-height: lh($lh, $size);
+  }
+}
+
+// RESPONSIVE
+@mixin responsive($val) {
+  @if ($val == "wide") {
+    @media only screen and (max-width: $query-wide) {
+      @content;
+    }
+  } @else if($val == "tablet") {
+    @media only screen and (max-width: $query-tablet) {
+      @content;
+    }
+  } @else if($val == "mo1") {
+    @media only screen and (max-width: $query-mobile1) {
+      @content;
+    }
+  } @else if($val == "mo2") {
+    @media only screen and (max-width: $query-mobile2) {
+      @content;
+    }
+  } @else {
+    @media only screen and (max-width: if(unitless($val), #{$val}px, $val)) {
+      @content;
+    }
+  }
+}

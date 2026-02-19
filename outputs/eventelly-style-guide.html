@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventelly Design System — Style Guide</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    boxShadow: {
+      DEFAULT: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+      sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      none: '0 0 #0000',
+    },
+    borderRadius: {
+      none: '0', DEFAULT: '0.25rem', md: '0.375rem', lg: '0.5rem', full: '9999px',
+    },
+    fontSize: {
+      micro: ['0.625rem', { lineHeight: '0.875rem' }],
+      xs: ['0.75rem', { lineHeight: '1rem' }],
+      sm: ['0.875rem', { lineHeight: '1.25rem' }],
+      base: ['1rem', { lineHeight: '1.5rem' }],
+      lg: ['1.125rem', { lineHeight: '1.75rem' }],
+      xl: ['1.25rem', { lineHeight: '1.75rem' }],
+      '2xl': ['1.5rem', { lineHeight: '2rem' }],
+    },
+    extend: {
+      colors: {
+        'admin-primary': {
+          DEFAULT:'#178C65',50:'#F0F8F5',100:'#DCEFE8',200:'#B3DBCC',300:'#75C7A9',
+          400:'#36BA8B',500:'#178C65',600:'#107454',700:'#0A5D43',800:'#064632',900:'#043525',
+        },
+        'brand-primary': {
+          DEFAULT:'#28E486',50:'#E8FBF2',100:'#D1F7E5',200:'#A3EFCB',300:'#75E7B1',
+          400:'#47DF97',500:'#28E486',600:'#1EB86C',700:'#178C65',800:'#0B4733',900:'#07231C',
+        },
+        neutral: {
+          50:'#F1F7F6',100:'#E3EDEB',200:'#C9D5D3',300:'#ADBAB7',400:'#8A9895',
+          500:'#6B7876',600:'#556260',700:'#414D4B',800:'#303938',900:'#212928',950:'#141B1A',
+        },
+        'status-success': { bg:'#F0FDF4', text:'#15803D', border:'#16A34A', solid:'#22C55E' },
+        'status-warning': { bg:'#FFFBEB', text:'#B45309', border:'#D97706', solid:'#F59E0B' },
+        'status-error':   { bg:'#FEF2F2', text:'#B91C1C', border:'#DC2626', solid:'#EF4444' },
+        'status-info':    { bg:'#EFF6FF', text:'#1D4ED8', border:'#2563EB', solid:'#3B82F6' },
+        destructive: { bg:'#FEF2F2', text:'#DC2626', hover:'#B91C1C' },
+        'form-required': '#EF4444',
+      },
+      fontFamily: { sans: ['Pretendard','-apple-system','BlinkMacSystemFont','system-ui','Roboto','sans-serif'] },
+    },
+  },
+}
+</script>
+<style>
+  @media print {
+    body { font-size: 11px; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none !important; }
+    .print-cols-2 { columns: 2; column-gap: 24px; }
+    section { page-break-inside: avoid; }
+    @page { size: A4; margin: 16mm 14mm; }
+  }
+  .swatch { width: 48px; height: 48px; border-radius: 6px; flex-shrink: 0; }
+  .swatch-sm { width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; }
+  .toc a { text-decoration: none; color: #0A5D43; }
+  .toc a:hover { text-decoration: underline; }
+  .section-title { scroll-margin-top: 24px; }
+</style>
+</head>
+<body class="bg-white text-neutral-950 font-sans antialiased">
+
+<!-- Header -->
+<header class="bg-neutral-950 text-white px-8 py-10 print:py-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-sm font-medium text-neutral-400 tracking-wider uppercase mb-2">Design System</p>
+    <h1 class="text-3xl font-bold tracking-tight">Eventelly Style Guide</h1>
+    <p class="mt-2 text-neutral-400 text-sm">Version 1.0 &middot; February 2026 &middot; Standalone Reference</p>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-8 py-10 space-y-16">
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<nav class="toc border border-neutral-200 rounded-lg p-6">
+  <h2 class="text-lg font-bold text-neutral-950 mb-4">Table of Contents</h2>
+  <ol class="grid grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
+    <li><a href="#colors">1. Color System</a></li>
+    <li><a href="#typography">2. Typography Scale</a></li>
+    <li><a href="#spacing">3. Spacing</a></li>
+    <li><a href="#radius">4. Border Radius</a></li>
+    <li><a href="#shadow">5. Shadow</a></li>
+    <li><a href="#badges">6. Badge Component</a></li>
+    <li><a href="#tables">7. Table</a></li>
+    <li><a href="#buttons">8. Buttons</a></li>
+    <li><a href="#forms">9. Form Fields</a></li>
+    <li><a href="#cards">10. Cards</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 1. COLOR SYSTEM -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="colors" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">1. Color System</h2>
+  <p class="text-sm text-neutral-500 mb-8">Six-layer token architecture. Only these color groups are permitted in the codebase.</p>
+
+  <!-- Admin Primary -->
+  <div class="mb-10">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Admin Primary &mdash; Muted Green (Admin Interactive UI)</h3>
+    <div class="grid grid-cols-5 gap-3">
+      <div><div class="swatch" style="background:#F0F8F5;border:1px solid #E3EDEB"></div><p class="text-xs mt-1.5 font-medium">50</p><p class="text-xs text-neutral-500">#F0F8F5</p></div>
+      <div><div class="swatch" style="background:#DCEFE8"></div><p class="text-xs mt-1.5 font-medium">100</p><p class="text-xs text-neutral-500">#DCEFE8</p></div>
+      <div><div class="swatch" style="background:#B3DBCC"></div><p class="text-xs mt-1.5 font-medium">200</p><p class="text-xs text-neutral-500">#B3DBCC</p></div>
+      <div><div class="swatch" style="background:#75C7A9"></div><p class="text-xs mt-1.5 font-medium">300</p><p class="text-xs text-neutral-500">#75C7A9</p></div>
+      <div><div class="swatch" style="background:#36BA8B"></div><p class="text-xs mt-1.5 font-medium">400</p><p class="text-xs text-neutral-500">#36BA8B</p></div>
+      <div><div class="swatch" style="background:#178C65"></div><p class="text-xs mt-1.5 font-medium text-white">500 <span class="font-normal opacity-70">anchor</span></p><p class="text-xs text-neutral-500">#178C65</p></div>
+      <div><div class="swatch" style="background:#107454"></div><p class="text-xs mt-1.5 font-medium">600</p><p class="text-xs text-neutral-500">#107454</p></div>
+      <div><div class="swatch" style="background:#0A5D43"></div><p class="text-xs mt-1.5 font-medium">700 <span class="font-normal text-neutral-400">CTA</span></p><p class="text-xs text-neutral-500">#0A5D43</p></div>
+      <div><div class="swatch" style="background:#064632"></div><p class="text-xs mt-1.5 font-medium">800</p><p class="text-xs text-neutral-500">#064632</p></div>
+      <div><div class="swatch" style="background:#043525"></div><p class="text-xs mt-1.5 font-medium">900</p><p class="text-xs text-neutral-500">#043525</p></div>
+    </div>
+  </div>
+
+  <!-- Brand Primary -->
+  <div class="mb-10">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Brand Primary &mdash; Vibrant Green (Public Pages Only)</h3>
+    <div class="grid grid-cols-5 gap-3">
+      <div><div class="swatch" style="background:#E8FBF2;border:1px solid #D1F7E5"></div><p class="text-xs mt-1.5 font-medium">50</p><p class="text-xs text-neutral-500">#E8FBF2</p></div>
+      <div><div class="swatch" style="background:#D1F7E5"></div><p class="text-xs mt-1.5 font-medium">100</p><p class="text-xs text-neutral-500">#D1F7E5</p></div>
+      <div><div class="swatch" style="background:#A3EFCB"></div><p class="text-xs mt-1.5 font-medium">200</p><p class="text-xs text-neutral-500">#A3EFCB</p></div>
+      <div><div class="swatch" style="background:#75E7B1"></div><p class="text-xs mt-1.5 font-medium">300</p><p class="text-xs text-neutral-500">#75E7B1</p></div>
+      <div><div class="swatch" style="background:#47DF97"></div><p class="text-xs mt-1.5 font-medium">400</p><p class="text-xs text-neutral-500">#47DF97</p></div>
+      <div><div class="swatch" style="background:#28E486"></div><p class="text-xs mt-1.5 font-medium">500 <span class="font-normal opacity-70">anchor</span></p><p class="text-xs text-neutral-500">#28E486</p></div>
+      <div><div class="swatch" style="background:#1EB86C"></div><p class="text-xs mt-1.5 font-medium">600</p><p class="text-xs text-neutral-500">#1EB86C</p></div>
+      <div><div class="swatch" style="background:#178C65"></div><p class="text-xs mt-1.5 font-medium">700</p><p class="text-xs text-neutral-500">#178C65</p></div>
+      <div><div class="swatch" style="background:#0B4733"></div><p class="text-xs mt-1.5 font-medium">800</p><p class="text-xs text-neutral-500">#0B4733</p></div>
+      <div><div class="swatch" style="background:#07231C"></div><p class="text-xs mt-1.5 font-medium">900</p><p class="text-xs text-neutral-500">#07231C</p></div>
+    </div>
+  </div>
+
+  <!-- Neutral -->
+  <div class="mb-10">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Neutral &mdash; Unified Gray Scale</h3>
+    <div class="grid grid-cols-6 gap-3">
+      <div><div class="swatch" style="background:#F1F7F6;border:1px solid #E3EDEB"></div><p class="text-xs mt-1.5 font-medium">50</p><p class="text-xs text-neutral-500">#F1F7F6</p></div>
+      <div><div class="swatch" style="background:#E3EDEB"></div><p class="text-xs mt-1.5 font-medium">100</p><p class="text-xs text-neutral-500">#E3EDEB</p></div>
+      <div><div class="swatch" style="background:#C9D5D3"></div><p class="text-xs mt-1.5 font-medium">200</p><p class="text-xs text-neutral-500">#C9D5D3</p></div>
+      <div><div class="swatch" style="background:#ADBAB7"></div><p class="text-xs mt-1.5 font-medium">300</p><p class="text-xs text-neutral-500">#ADBAB7</p></div>
+      <div><div class="swatch" style="background:#8A9895"></div><p class="text-xs mt-1.5 font-medium">400</p><p class="text-xs text-neutral-500">#8A9895</p></div>
+      <div><div class="swatch" style="background:#6B7876"></div><p class="text-xs mt-1.5 font-medium">500</p><p class="text-xs text-neutral-500">#6B7876</p></div>
+      <div><div class="swatch" style="background:#556260"></div><p class="text-xs mt-1.5 font-medium">600</p><p class="text-xs text-neutral-500">#556260</p></div>
+      <div><div class="swatch" style="background:#414D4B"></div><p class="text-xs mt-1.5 font-medium">700</p><p class="text-xs text-neutral-500">#414D4B</p></div>
+      <div><div class="swatch" style="background:#303938"></div><p class="text-xs mt-1.5 font-medium">800</p><p class="text-xs text-neutral-500">#303938</p></div>
+      <div><div class="swatch" style="background:#212928"></div><p class="text-xs mt-1.5 font-medium">900</p><p class="text-xs text-neutral-500">#212928</p></div>
+      <div><div class="swatch" style="background:#141B1A"></div><p class="text-xs mt-1.5 font-medium">950</p><p class="text-xs text-neutral-500">#141B1A</p></div>
+    </div>
+  </div>
+
+  <!-- Semantic Status -->
+  <div class="mb-10">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Semantic &mdash; Status Colors</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <!-- Success -->
+      <div class="border border-neutral-100 rounded-lg overflow-hidden">
+        <div class="px-3 py-2 bg-neutral-50 text-xs font-semibold uppercase tracking-wider text-neutral-500">Success</div>
+        <div class="p-3 space-y-2">
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#F0FDF4;border:1px solid #E3EDEB"></div><div><p class="text-xs font-medium">bg</p><p class="text-xs text-neutral-400">#F0FDF4</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#15803D"></div><div><p class="text-xs font-medium">text</p><p class="text-xs text-neutral-400">#15803D</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#16A34A"></div><div><p class="text-xs font-medium">border</p><p class="text-xs text-neutral-400">#16A34A</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#22C55E"></div><div><p class="text-xs font-medium">solid</p><p class="text-xs text-neutral-400">#22C55E</p></div></div>
+        </div>
+      </div>
+      <!-- Warning -->
+      <div class="border border-neutral-100 rounded-lg overflow-hidden">
+        <div class="px-3 py-2 bg-neutral-50 text-xs font-semibold uppercase tracking-wider text-neutral-500">Warning</div>
+        <div class="p-3 space-y-2">
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#FFFBEB;border:1px solid #E3EDEB"></div><div><p class="text-xs font-medium">bg</p><p class="text-xs text-neutral-400">#FFFBEB</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#B45309"></div><div><p class="text-xs font-medium">text</p><p class="text-xs text-neutral-400">#B45309</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#D97706"></div><div><p class="text-xs font-medium">border</p><p class="text-xs text-neutral-400">#D97706</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#F59E0B"></div><div><p class="text-xs font-medium">solid</p><p class="text-xs text-neutral-400">#F59E0B</p></div></div>
+        </div>
+      </div>
+      <!-- Error -->
+      <div class="border border-neutral-100 rounded-lg overflow-hidden">
+        <div class="px-3 py-2 bg-neutral-50 text-xs font-semibold uppercase tracking-wider text-neutral-500">Error</div>
+        <div class="p-3 space-y-2">
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#FEF2F2;border:1px solid #E3EDEB"></div><div><p class="text-xs font-medium">bg</p><p class="text-xs text-neutral-400">#FEF2F2</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#B91C1C"></div><div><p class="text-xs font-medium">text</p><p class="text-xs text-neutral-400">#B91C1C</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#DC2626"></div><div><p class="text-xs font-medium">border</p><p class="text-xs text-neutral-400">#DC2626</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#EF4444"></div><div><p class="text-xs font-medium">solid</p><p class="text-xs text-neutral-400">#EF4444</p></div></div>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="border border-neutral-100 rounded-lg overflow-hidden">
+        <div class="px-3 py-2 bg-neutral-50 text-xs font-semibold uppercase tracking-wider text-neutral-500">Info</div>
+        <div class="p-3 space-y-2">
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#EFF6FF;border:1px solid #E3EDEB"></div><div><p class="text-xs font-medium">bg</p><p class="text-xs text-neutral-400">#EFF6FF</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#1D4ED8"></div><div><p class="text-xs font-medium">text</p><p class="text-xs text-neutral-400">#1D4ED8</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#2563EB"></div><div><p class="text-xs font-medium">border</p><p class="text-xs text-neutral-400">#2563EB</p></div></div>
+          <div class="flex items-center gap-2"><div class="swatch-sm" style="background:#3B82F6"></div><div><p class="text-xs font-medium">solid</p><p class="text-xs text-neutral-400">#3B82F6</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Destructive + Form Required -->
+  <div class="grid grid-cols-2 gap-6 mb-6">
+    <div>
+      <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Destructive &mdash; Delete / Danger Actions</h3>
+      <div class="flex gap-4">
+        <div><div class="swatch" style="background:#FEF2F2;border:1px solid #E3EDEB"></div><p class="text-xs mt-1.5 font-medium">bg</p><p class="text-xs text-neutral-500">#FEF2F2</p></div>
+        <div><div class="swatch" style="background:#DC2626"></div><p class="text-xs mt-1.5 font-medium">text</p><p class="text-xs text-neutral-500">#DC2626</p></div>
+        <div><div class="swatch" style="background:#B91C1C"></div><p class="text-xs mt-1.5 font-medium">hover</p><p class="text-xs text-neutral-500">#B91C1C</p></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Form Required &mdash; Asterisk Indicator</h3>
+      <div class="flex items-center gap-3">
+        <div class="swatch" style="background:#EF4444"></div>
+        <div><p class="text-xs font-medium">form-required</p><p class="text-xs text-neutral-500">#EF4444</p>
+        <p class="text-sm mt-1">Field Name <span style="color:#EF4444">*</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 2. TYPOGRAPHY -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="typography" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">2. Typography Scale</h2>
+  <p class="text-sm text-neutral-500 mb-8">Font: Pretendard. Admin UI max: 24px (text-2xl). Sizes above text-2xl are reserved for public pages.</p>
+
+  <div class="border border-neutral-100 rounded-lg overflow-hidden">
+    <!-- Header -->
+    <div class="grid grid-cols-12 gap-4 px-5 py-3 bg-neutral-50 border-b border-neutral-100 text-xs font-medium text-neutral-500 uppercase tracking-wider">
+      <div class="col-span-2">Token</div>
+      <div class="col-span-2">Size / LH</div>
+      <div class="col-span-3">Usage</div>
+      <div class="col-span-5">Rendered</div>
+    </div>
+    <!-- Rows -->
+    <div class="divide-y divide-neutral-100">
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-micro</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">10px / 14px</div>
+        <div class="col-span-3 text-sm text-neutral-600">Badge, pill text</div>
+        <div class="col-span-5 text-micro">The quick brown fox jumps over the lazy dog</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-xs</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">12px / 16px</div>
+        <div class="col-span-3 text-sm text-neutral-600">Timestamps, helpers</div>
+        <div class="col-span-5 text-xs">The quick brown fox jumps over the lazy dog</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-sm</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">14px / 20px</div>
+        <div class="col-span-3 text-sm text-neutral-600"><strong>Default body</strong>, nav, buttons</div>
+        <div class="col-span-5 text-sm">The quick brown fox jumps over the lazy dog</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-base</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">16px / 24px</div>
+        <div class="col-span-3 text-sm text-neutral-600">Rarely used</div>
+        <div class="col-span-5 text-base">The quick brown fox jumps over the lazy dog</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-lg</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">18px / 28px</div>
+        <div class="col-span-3 text-sm text-neutral-600">Section headings, modal titles</div>
+        <div class="col-span-5 text-lg font-semibold">Section Heading</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center">
+        <div class="col-span-2"><code class="text-xs bg-neutral-100 px-1.5 py-0.5 rounded">text-xl</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">20px / 28px</div>
+        <div class="col-span-3 text-sm text-neutral-600">Secondary page titles</div>
+        <div class="col-span-5 text-xl font-bold">Page Subtitle</div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 px-5 py-4 items-center bg-admin-primary-50/30">
+        <div class="col-span-2"><code class="text-xs bg-admin-primary-100 text-admin-primary-700 px-1.5 py-0.5 rounded">text-2xl</code></div>
+        <div class="col-span-2 text-sm text-neutral-600">24px / 32px</div>
+        <div class="col-span-3 text-sm font-semibold text-admin-primary-700">Page title &mdash; ADMIN MAX</div>
+        <div class="col-span-5 text-2xl font-bold">Page Title</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 grid grid-cols-4 gap-4">
+    <div class="border border-neutral-100 rounded-lg p-4">
+      <p class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Normal (400)</p>
+      <p class="text-sm">Body text baseline</p>
+    </div>
+    <div class="border border-neutral-100 rounded-lg p-4">
+      <p class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Medium (500)</p>
+      <p class="text-sm font-medium">Labels, nav active</p>
+    </div>
+    <div class="border border-neutral-100 rounded-lg p-4">
+      <p class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Semibold (600)</p>
+      <p class="text-sm font-semibold">Buttons, section headings</p>
+    </div>
+    <div class="border border-neutral-100 rounded-lg p-4">
+      <p class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Bold (700)</p>
+      <p class="text-sm font-bold">Page titles, stats</p>
+    </div>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 3. SPACING -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="spacing" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">3. Spacing</h2>
+  <p class="text-sm text-neutral-500 mb-8">4px base unit. Standard Tailwind spacing scale.</p>
+
+  <div class="space-y-3">
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">4px <span class="text-neutral-400">(1)</span></div><div class="h-4 bg-admin-primary-200 rounded" style="width:4px"></div><div class="text-xs text-neutral-600">gap-1, mb-1</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">8px <span class="text-neutral-400">(2)</span></div><div class="h-4 bg-admin-primary-200 rounded" style="width:8px"></div><div class="text-xs text-neutral-600">gap-2, p-2, ml-2</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">12px <span class="text-neutral-400">(3)</span></div><div class="h-4 bg-admin-primary-200 rounded" style="width:12px"></div><div class="text-xs text-neutral-600">px-3, gap-3</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">16px <span class="text-neutral-400">(4)</span></div><div class="h-4 bg-admin-primary-300 rounded" style="width:16px"></div><div class="text-xs text-neutral-800 font-medium">p-4, gap-4 &mdash; most common</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">20px <span class="text-neutral-400">(5)</span></div><div class="h-4 bg-admin-primary-300 rounded" style="width:20px"></div><div class="text-xs text-neutral-800 font-medium">p-5, px-5 &mdash; card/table padding</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">24px <span class="text-neutral-400">(6)</span></div><div class="h-4 bg-admin-primary-400 rounded" style="width:24px"></div><div class="text-xs text-neutral-800 font-medium">p-6, gap-6 &mdash; page padding</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">32px <span class="text-neutral-400">(8)</span></div><div class="h-4 bg-admin-primary-200 rounded" style="width:32px"></div><div class="text-xs text-neutral-600">p-8, mb-8, gap-8</div></div>
+    <div class="flex items-center gap-4"><div class="w-16 text-right text-xs text-neutral-500">48px <span class="text-neutral-400">(12)</span></div><div class="h-4 bg-admin-primary-200 rounded" style="width:48px"></div><div class="text-xs text-neutral-600">mb-12, mt-12</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 4. RADIUS -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="radius" class="section-title mt-16">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">4. Border Radius</h2>
+  <p class="text-sm text-neutral-500 mb-8">Custom scale replacing Tailwind defaults. Only these 5 values exist.</p>
+
+  <div class="grid grid-cols-5 gap-6">
+    <div class="text-center">
+      <div class="w-20 h-20 mx-auto bg-admin-primary-100 border-2 border-admin-primary-300" style="border-radius:0"></div>
+      <p class="text-sm font-semibold mt-3">none</p>
+      <p class="text-xs text-neutral-500">0px</p>
+      <p class="text-xs text-neutral-400 mt-1">Reset</p>
+    </div>
+    <div class="text-center">
+      <div class="w-20 h-20 mx-auto bg-admin-primary-100 border-2 border-admin-primary-300 rounded"></div>
+      <p class="text-sm font-semibold mt-3">rounded</p>
+      <p class="text-xs text-neutral-500">4px</p>
+      <p class="text-xs text-neutral-400 mt-1">Tags</p>
+    </div>
+    <div class="text-center">
+      <div class="w-20 h-20 mx-auto bg-admin-primary-100 border-2 border-admin-primary-300 rounded-md"></div>
+      <p class="text-sm font-semibold mt-3">rounded-md</p>
+      <p class="text-xs text-neutral-500">6px</p>
+      <p class="text-xs text-admin-primary-700 font-medium mt-1">Buttons, Inputs</p>
+    </div>
+    <div class="text-center">
+      <div class="w-20 h-20 mx-auto bg-admin-primary-100 border-2 border-admin-primary-300 rounded-lg"></div>
+      <p class="text-sm font-semibold mt-3">rounded-lg</p>
+      <p class="text-xs text-neutral-500">8px</p>
+      <p class="text-xs text-admin-primary-700 font-medium mt-1">Cards, Modals</p>
+    </div>
+    <div class="text-center">
+      <div class="w-20 h-20 mx-auto bg-admin-primary-100 border-2 border-admin-primary-300 rounded-full"></div>
+      <p class="text-sm font-semibold mt-3">rounded-full</p>
+      <p class="text-xs text-neutral-500">9999px</p>
+      <p class="text-xs text-neutral-400 mt-1">Badges, Avatars</p>
+    </div>
+  </div>
+
+  <div class="mt-8 border border-neutral-100 rounded-lg overflow-hidden">
+    <div class="grid grid-cols-3 gap-4 px-5 py-3 bg-neutral-50 border-b border-neutral-100 text-xs font-medium text-neutral-500 uppercase tracking-wider">
+      <div>Element</div><div>Radius</div><div>Class</div>
+    </div>
+    <div class="divide-y divide-neutral-100 text-sm">
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Buttons</div><div>6px (md)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">via .btn</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Inputs</div><div>6px (md)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">via .input</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Nav items</div><div>6px (md)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">rounded-md</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Cards</div><div>8px (lg)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">via .card</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Modals</div><div>8px (lg)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">rounded-lg</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Dropdowns</div><div>8px (lg)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">rounded-lg</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Status Badges</div><div>pill (full)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">rounded-full</code></div></div>
+      <div class="grid grid-cols-3 gap-4 px-5 py-3"><div>Tags</div><div>4px (default)</div><div><code class="text-xs bg-neutral-100 px-1 rounded">rounded</code></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 5. SHADOW -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="shadow" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">5. Shadow</h2>
+  <p class="text-sm text-neutral-500 mb-8">Shadow-minimal approach. Cards have no default shadow.</p>
+
+  <div class="grid grid-cols-3 gap-8">
+    <div class="text-center">
+      <div class="bg-white border border-neutral-100 rounded-lg p-6 h-28 flex items-center justify-center">
+        <span class="text-sm text-neutral-500">No shadow</span>
+      </div>
+      <p class="text-sm font-semibold mt-3">Card (default)</p>
+      <p class="text-xs text-neutral-500">border only</p>
+    </div>
+    <div class="text-center">
+      <div class="bg-white border border-neutral-100 rounded-lg p-6 h-28 flex items-center justify-center shadow-sm">
+        <span class="text-sm text-neutral-500">shadow-sm</span>
+      </div>
+      <p class="text-sm font-semibold mt-3">Card (hover state)</p>
+      <p class="text-xs text-neutral-500">hover:shadow-sm</p>
+    </div>
+    <div class="text-center">
+      <div class="bg-white border border-neutral-100 rounded-lg p-6 h-28 flex items-center justify-center shadow-lg">
+        <span class="text-sm text-neutral-500">shadow-lg</span>
+      </div>
+      <p class="text-sm font-semibold mt-3">Modal / Dropdown</p>
+      <p class="text-xs text-neutral-500">shadow-lg</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 6. BADGES -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="badges" class="section-title mt-16">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">6. Badge Component</h2>
+  <p class="text-sm text-neutral-500 mb-8"><code>&lt;Badge&gt;</code> from <code>src/components/Badge.tsx</code>. Four variants with typed color props.</p>
+
+  <!-- Status Badges -->
+  <div class="mb-8">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Status (text-xs, rounded-full) &mdash; Semantic</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-success-bg text-status-success-text">Active</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-warning-bg text-status-warning-text">Pending</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-error-bg text-status-error-text">Overdue</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-info-bg text-status-info-text">Ongoing</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-neutral-100 text-neutral-600">Inactive</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-admin-primary-50 text-admin-primary-700">Upcoming</span>
+    </div>
+    <p class="text-xs text-neutral-400 mt-2">Colors: success, warning, error, info, neutral, primary</p>
+  </div>
+
+  <!-- Category Badges -->
+  <div class="mb-8">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Category (text-micro, rounded-full) &mdash; Decorative</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-blue-50 text-blue-700">General</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-purple-50 text-purple-700">VIP</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-green-50 text-green-700">Workshop</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-amber-50 text-amber-700">Invitation</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-orange-50 text-orange-700">Exhibitor</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-red-50 text-red-700">Cancelled</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-pink-50 text-pink-700">Networking</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-micro font-medium rounded-full bg-neutral-100 text-neutral-700">Free</span>
+    </div>
+    <p class="text-xs text-neutral-400 mt-2">Colors: blue, purple, green, amber, orange, red, pink, neutral</p>
+  </div>
+
+  <!-- Compact Badges -->
+  <div class="mb-8">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Compact (text-micro, rounded) &mdash; Dense UI</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center px-1.5 py-0.5 text-micro font-medium rounded bg-admin-primary/90 text-white">Upcoming</span>
+      <span class="inline-flex items-center px-1.5 py-0.5 text-micro font-medium rounded bg-neutral-800 text-white">Completed</span>
+      <span class="inline-flex items-center px-1.5 py-0.5 text-micro font-medium rounded bg-neutral-100 text-neutral-600">Draft</span>
+      <span class="inline-flex items-center px-1.5 py-0.5 text-micro font-medium rounded bg-status-success-bg text-status-success-text">Active</span>
+      <span class="inline-flex items-center px-1.5 py-0.5 text-micro font-medium rounded bg-status-warning-bg text-status-warning-text">Pending</span>
+    </div>
+    <p class="text-xs text-neutral-400 mt-2">Colors: primary-solid, dark, neutral, + all status colors</p>
+  </div>
+
+  <!-- Tag Badges -->
+  <div class="mb-8">
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Tag (text-xs, rounded) &mdash; Neutral Metadata</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center px-2 py-0.5 text-xs rounded bg-neutral-100 text-neutral-600">Day 1 (Mar 15)</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs rounded bg-neutral-100 text-neutral-600">USD</span>
+      <span class="inline-flex items-center px-2 py-0.5 text-xs rounded bg-neutral-100 text-neutral-600">Online</span>
+    </div>
+    <p class="text-xs text-neutral-400 mt-2">No color prop &mdash; always neutral</p>
+  </div>
+
+  <!-- Removable -->
+  <div>
+    <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mb-4">Removable (onRemove prop)</h3>
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full bg-admin-primary-50 text-admin-primary-700">
+        English
+        <span class="opacity-60">&times;</span>
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full bg-admin-primary-50 text-admin-primary-700">
+        Korean
+        <span class="opacity-60">&times;</span>
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full bg-neutral-100 text-neutral-600">
+        Tag Name
+        <span class="opacity-60">&times;</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 7. TABLE -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="tables" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">7. Table</h2>
+  <p class="text-sm text-neutral-500 mb-8">CSS classes in globals.css. Wrap in <code>.card overflow-hidden</code>. Use <code>&lt;table className="table"&gt;</code>.</p>
+
+  <div class="bg-white rounded-lg border border-neutral-100 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-neutral-100">
+            <th class="text-left px-5 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Name</th>
+            <th class="text-left px-5 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Email</th>
+            <th class="text-left px-5 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
+            <th class="text-left px-5 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Role</th>
+            <th class="text-right px-5 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-100">
+          <tr class="hover:bg-neutral-50 transition-colors">
+            <td class="px-5 py-4 text-sm font-medium text-neutral-950">Sarah Chen</td>
+            <td class="px-5 py-4 text-sm text-neutral-600">sarah@example.com</td>
+            <td class="px-5 py-4 text-sm"><span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-success-bg text-status-success-text">Active</span></td>
+            <td class="px-5 py-4 text-sm text-neutral-600">Owner</td>
+            <td class="px-5 py-4 text-sm text-right"><span class="text-neutral-400">...</span></td>
+          </tr>
+          <tr class="hover:bg-neutral-50 transition-colors">
+            <td class="px-5 py-4 text-sm font-medium text-neutral-950">James Park</td>
+            <td class="px-5 py-4 text-sm text-neutral-600">james@example.com</td>
+            <td class="px-5 py-4 text-sm"><span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-status-warning-bg text-status-warning-text">Pending</span></td>
+            <td class="px-5 py-4 text-sm text-neutral-600">Manager</td>
+            <td class="px-5 py-4 text-sm text-right"><span class="text-neutral-400">...</span></td>
+          </tr>
+          <tr class="hover:bg-neutral-50 transition-colors opacity-60">
+            <td class="px-5 py-4 text-sm font-medium text-neutral-950">Min-Ji Lee</td>
+            <td class="px-5 py-4 text-sm text-neutral-600">minji@example.com</td>
+            <td class="px-5 py-4 text-sm"><span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-neutral-100 text-neutral-600">Inactive</span></td>
+            <td class="px-5 py-4 text-sm text-neutral-600">Staff</td>
+            <td class="px-5 py-4 text-sm text-right"><span class="text-neutral-400">...</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex items-center justify-between px-5 py-4 border-t border-neutral-100">
+      <span class="text-sm text-neutral-500">Showing <span class="font-medium text-neutral-800">1</span> to <span class="font-medium text-neutral-800">3</span> of <span class="font-medium text-neutral-800">24</span></span>
+      <div class="flex items-center gap-1">
+        <button class="min-w-[36px] h-9 px-3 text-sm font-medium rounded-md text-neutral-300 cursor-not-allowed">&larr;</button>
+        <button class="min-w-[36px] h-9 px-3 text-sm font-medium rounded-md bg-admin-primary text-white">1</button>
+        <button class="min-w-[36px] h-9 px-3 text-sm font-medium rounded-md text-neutral-600 hover:bg-neutral-100">2</button>
+        <button class="min-w-[36px] h-9 px-3 text-sm font-medium rounded-md text-neutral-600 hover:bg-neutral-100">3</button>
+        <button class="min-w-[36px] h-9 px-3 text-sm font-medium rounded-md text-neutral-600 hover:bg-neutral-100">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 text-xs text-neutral-400">
+    <strong>Auto-styled by .table class:</strong> th (padding, uppercase, neutral-500), thead tr (border-b), tbody (divide-y), tbody tr (hover:bg-neutral-50), td (padding, text-sm).
+    Inactive row shown with <code>opacity-60</code>.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 8. BUTTONS -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="buttons" class="section-title mt-16">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">8. Buttons</h2>
+  <p class="text-sm text-neutral-500 mb-8">CSS classes: <code>.btn</code> base + variant. Defined in globals.css.</p>
+
+  <div class="flex flex-wrap gap-4 items-center mb-8">
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-admin-primary-700 text-white shadow-sm">Primary</button>
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-neutral-950 border border-neutral-300">Secondary</button>
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-neutral-950 text-white shadow-sm">Dark</button>
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-transparent text-neutral-800">Ghost</button>
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-transparent text-admin-primary-700 border border-admin-primary-700">Outline Primary</button>
+    <button class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-destructive-text text-white">Delete</button>
+  </div>
+
+  <div class="border border-neutral-100 rounded-lg overflow-hidden">
+    <div class="grid grid-cols-4 gap-4 px-5 py-3 bg-neutral-50 border-b border-neutral-100 text-xs font-medium text-neutral-500 uppercase tracking-wider">
+      <div>Class</div><div>Background</div><div>Text</div><div>Note</div>
+    </div>
+    <div class="divide-y divide-neutral-100 text-sm">
+      <div class="grid grid-cols-4 gap-4 px-5 py-3"><div><code class="text-xs">.btn-primary</code></div><div>admin-primary-700</div><div>white</div><div>shadow-sm</div></div>
+      <div class="grid grid-cols-4 gap-4 px-5 py-3"><div><code class="text-xs">.btn-secondary</code></div><div>white</div><div>neutral-950</div><div>border neutral-300</div></div>
+      <div class="grid grid-cols-4 gap-4 px-5 py-3"><div><code class="text-xs">.btn-dark</code></div><div>neutral-950</div><div>white</div><div>shadow-sm</div></div>
+      <div class="grid grid-cols-4 gap-4 px-5 py-3"><div><code class="text-xs">.btn-ghost</code></div><div>transparent</div><div>neutral-800</div><div>hover: bg-neutral-100</div></div>
+      <div class="grid grid-cols-4 gap-4 px-5 py-3"><div><code class="text-xs">.btn-outline-primary</code></div><div>transparent</div><div>admin-primary-700</div><div>border, hover fills</div></div>
+    </div>
+  </div>
+
+  <h3 class="text-sm font-semibold text-neutral-800 uppercase tracking-wider mt-8 mb-4">Icon-Only Actions (no .btn class)</h3>
+  <div class="flex gap-4 items-center">
+    <button class="p-2 text-neutral-400 hover:text-admin-primary-600 hover:bg-admin-primary-50 rounded-md transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+    </button>
+    <button class="p-2 text-neutral-400 hover:text-destructive-text hover:bg-destructive-bg rounded-md transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+    </button>
+    <span class="text-xs text-neutral-400 ml-2">Edit (primary hover) &middot; Delete (destructive hover)</span>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 9. FORM FIELDS -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="forms" class="section-title">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">9. Form Fields</h2>
+  <p class="text-sm text-neutral-500 mb-8">CSS classes: <code>.input</code>, <code>.label</code>. Applied to input, select, textarea.</p>
+
+  <div class="grid grid-cols-2 gap-8">
+    <div>
+      <label class="block text-sm font-medium text-neutral-800 mb-1.5">Event Name <span class="text-form-required">*</span></label>
+      <input type="text" placeholder="Enter event name" class="block w-full px-3 py-2.5 bg-white border border-neutral-200 rounded-md text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-admin-primary-500/20 focus:border-admin-primary">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-neutral-800 mb-1.5">Category</label>
+      <select class="block w-full px-3 py-2.5 bg-white border border-neutral-200 rounded-md text-sm text-neutral-950 focus:outline-none focus:ring-2 focus:ring-admin-primary-500/20 focus:border-admin-primary">
+        <option>Conference</option>
+        <option>Exhibition</option>
+        <option>Workshop</option>
+      </select>
+    </div>
+    <div class="col-span-2">
+      <label class="block text-sm font-medium text-neutral-800 mb-1.5">Description</label>
+      <textarea placeholder="Enter description..." class="block w-full px-3 py-2.5 bg-white border border-neutral-200 rounded-md text-sm placeholder-neutral-400 min-h-[80px] focus:outline-none focus:ring-2 focus:ring-admin-primary-500/20 focus:border-admin-primary"></textarea>
+      <p class="text-xs text-neutral-500 mt-1">Brief description of the event (max 500 characters)</p>
+    </div>
+  </div>
+
+  <div class="mt-8 flex items-center gap-8">
+    <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="w-4 h-4 rounded border-neutral-300 text-admin-primary-600"> Enable registration</label>
+    <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" class="w-4 h-4 text-admin-primary-600" checked> Online</label>
+    <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" class="w-4 h-4 text-admin-primary-600"> Offline</label>
+  </div>
+
+  <!-- Toggle switch -->
+  <div class="mt-6 flex items-center gap-4">
+    <p class="text-sm font-medium text-neutral-800">Toggle Switch</p>
+    <div class="relative bg-admin-primary-600 h-6 w-11 rounded-full cursor-pointer">
+      <div class="absolute top-1 h-4 w-4 bg-white rounded-full shadow-sm" style="left:24px"></div>
+    </div>
+    <span class="text-xs text-neutral-500">ON state (admin-primary-600)</span>
+    <div class="relative bg-neutral-200 h-6 w-11 rounded-full cursor-pointer ml-4">
+      <div class="absolute top-1 left-1 h-4 w-4 bg-white rounded-full shadow-sm"></div>
+    </div>
+    <span class="text-xs text-neutral-500">OFF state (neutral-200)</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 10. CARDS -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="cards" class="section-title mt-16">
+  <h2 class="text-2xl font-bold text-neutral-950 mb-1">10. Cards</h2>
+  <p class="text-sm text-neutral-500 mb-8">CSS class: <code>.card</code> = <code>bg-white rounded-lg border border-neutral-100</code>. No default shadow.</p>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div>
+      <p class="text-xs text-neutral-400 uppercase tracking-wider mb-3">Default</p>
+      <div class="bg-white rounded-lg border border-neutral-100 p-5">
+        <h4 class="text-sm font-semibold text-neutral-950">Card Title</h4>
+        <p class="text-sm text-neutral-500 mt-1">Standard container with p-5 padding.</p>
+      </div>
+    </div>
+    <div>
+      <p class="text-xs text-neutral-400 uppercase tracking-wider mb-3">Hoverable</p>
+      <div class="bg-white rounded-lg border border-neutral-100 p-5 hover:shadow-sm transition-all cursor-pointer">
+        <h4 class="text-sm font-semibold text-neutral-950">Clickable Card</h4>
+        <p class="text-sm text-neutral-500 mt-1">Hover to see shadow-sm appear.</p>
+      </div>
+    </div>
+    <div>
+      <p class="text-xs text-neutral-400 uppercase tracking-wider mb-3">Muted</p>
+      <div class="bg-neutral-50 rounded-lg border border-neutral-100 p-5">
+        <h4 class="text-sm font-semibold text-neutral-950">Info Panel</h4>
+        <p class="text-sm text-neutral-500 mt-1">Muted background for secondary info.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-neutral-100 mt-16 py-8 px-8">
+  <div class="max-w-5xl mx-auto flex items-center justify-between text-xs text-neutral-400">
+    <p>Eventelly Design System v1.0 &middot; February 2026</p>
+    <p>Source: tailwind.config.ts, globals.css, STYLE_GUIDE.md</p>
+  </div>
+</footer>
+
+</body>
+</html>

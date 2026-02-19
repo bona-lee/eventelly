@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(chcp:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(unzip:*)",
+      "Bash(python3:*)",
+      "Bash(iconv:*)",
+      "Bash(dir:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next build:*)",
+      "Bash(npx next lint:*)",
+      "Bash(cmd /c \"tree /f c:\\\\Users\\\\yhlee\\\\Desktop\\\\myclaude\\\\eventelly\\\\src\\\\app /A\")",
+      "Bash(cmd /c \"tree /f c:\\\\Users\\\\yhlee\\\\Desktop\\\\myclaude\\\\eventelly\\\\src\\\\app\")",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(while read file)",
+      "Bash(do grep -o \"bg-[a-zA-Z0-9\\\\-/]*\" \"$file\")",
+      "Bash(done)",
+      "Bash(do grep -o \"text-[a-zA-Z0-9\\\\-/]*\" \"$file\")",
+      "Bash(do grep -o \"border-[a-zA-Z0-9\\\\-/]*\" \"$file\")",
+      "Bash(do grep -o \"ring-[a-zA-Z0-9\\\\-/]*\" \"$file\")",
+      "Bash(do grep -o \"\\\\\\(from\\\\|to\\\\|via\\\\\\)-[a-zA-Z0-9\\\\-/]*\" \"$file\")",
+      "Bash(taskkill:*)",
+      "Bash(exit:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File:*)",
+      "Bash(del \"c:\\\\Users\\\\yhlee\\\\Desktop\\\\myclaude\\\\eventelly\\\\migrate-gray.ps1\")",
+      "Bash(findstr:*)",
+      "Bash(/tmp/replace2.ps1 << 'PSEOF'\n$path = 'c:\\\\Users\\\\yhlee\\\\Desktop\\\\myclaude\\\\eventelly\\\\src\\\\app\\\\workspace\\\\[workspaceId]\\\\event\\\\[eventId]\\\\settings\\\\main\\\\exhibition\\\\page.tsx'\n$content = [System.IO.File]::ReadAllText\\($path\\)\n$content = $content.Replace\\('text-red-600 hover:text-red-700', 'text-destructive-text hover:text-destructive-hover'\\)\n[System.IO.File]::WriteAllText\\($path, $content\\)\nWrite-Host \"Done. Second replacement applied.\"\nPSEOF)",
+      "Bash(npx eslint:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm ls:*)",
+      "Bash(npx husky:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx lint-staged)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(Select-String -Pattern \"text-micro\" -Context 0,3)",
+      "Bash(powershell:*)",
+      "Bash(npm run build:*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\yhlee\\Desktop\\myclaude\\eventelly",
+      "c:\\Users\\yhlee\\Desktop\\myclaude\\eventelly\\src\\app\\workspace\\[workspaceId]\\event\\[eventId]\\settings\\main\\access-codes"
+    ]
+  }
+}

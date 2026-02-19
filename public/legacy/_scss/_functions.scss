@@ -1,0 +1,23 @@
+$base-font-size: 16px;
+$base-size: 4px;
+
+$query-wide: 1400px;
+$query-tablet: 768px;
+$query-mobile1: 576px;
+$query-mobile2: 360px;
+
+// *함수*
+// rem 사이즈 구하는 함수
+@function toRem($pixSize, $context: $base-font-size) {
+  @return calc($pixSize / $context) * 1rem;
+}
+
+// line-height 상대값 구하기
+@function lh($lhSize, $ftSize) {
+  @return calc($lhSize / $ftSize);
+}
+
+// flex 맵 value값 가져오기
+@function get-flex-val($key) {
+  @return map-get($flex, $key);
+}
