@@ -52,9 +52,7 @@ export default function EventSeriesPage() {
 
   const groupList = ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5']
 
-  const availableNewGroups = useMemo(() => {
-    return groupList.filter(g => !newSeries.groups.includes(g))
-  }, [newSeries.groups])
+  const availableNewGroups = groupList.filter(g => !newSeries.groups.includes(g))
 
   const addNewSeriesGroup = () => {
     if (selectedNewGroup && !newSeries.groups.includes(selectedNewGroup)) {
@@ -176,20 +174,19 @@ export default function EventSeriesPage() {
     }
 
     return result
-  }, [searchQuery, filterGroup, sortField, sortOrder])
+  }, [searchQuery, filterGroup, sortField, sortOrder, eventSeries])  
 
   const totalPages = Math.ceil(filteredSeries.length / perPage)
 
-  const sortedAndFilteredSeries = useMemo(() => {
+  const sortedAndFilteredSeries = (() => {
     const start = (currentPage - 1) * perPage
     const end = start + perPage
     return filteredSeries.slice(start, end)
-  }, [filteredSeries, currentPage])
+  })()
 
   // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [searchQuery, filterGroup])
+   
+  useEffect(() => { setCurrentPage(1) }, [searchQuery, filterGroup])
 
   const toggleSort = (field: string) => {
     if (sortField === field) {

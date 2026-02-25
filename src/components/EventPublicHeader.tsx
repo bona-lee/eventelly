@@ -17,10 +17,9 @@ export default function EventPublicHeader({ eventSlug }: { eventSlug: string }) 
   const basePath = `/events/${eventSlug}`
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Mock: toggle this to test authenticated vs unauthenticated state
-  const [isAuthenticated] = useState(true)
-
-  const isMyPage = pathname.includes('/mypage')
+  // Auth state: true when on /mypage routes (simulates logged-in user viewing their page)
+  // In production, replace with actual auth check
+  const isAuthenticated = pathname.includes('/mypage')
 
   const isActive = (href: string) => {
     if (href === '') return pathname === basePath || pathname === `${basePath}/`

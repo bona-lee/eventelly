@@ -351,7 +351,7 @@ export default function FormsRegistrationPage() {
   // Add event field to form
   const addFieldToForm = (eventField: EventField, index?: number) => {
     const newFormField: FormField = {
-      id: `ff-${Date.now()}`,
+      id: `ff-${Date.now()}`,  
       eventFieldId: eventField.id,
       type: eventField.type,
       label: eventField.label,
@@ -377,7 +377,7 @@ export default function FormsRegistrationPage() {
   // Import workspace field to event fields
   const importWorkspaceField = (wsField: WorkspaceField) => {
     const newEventField: EventField = {
-      id: `ef-${Date.now()}`,
+      id: `ef-${Date.now()}`,  
       type: wsField.type,
       label: wsField.label,
       placeholder: wsField.placeholder,
@@ -397,7 +397,7 @@ export default function FormsRegistrationPage() {
   const createNewField = () => {
     if (!newField.label?.trim()) return
     const eventField: EventField = {
-      id: `ef-${Date.now()}`,
+      id: `ef-${Date.now()}`,  
       type: newField.type || 'text',
       label: newField.label,
       placeholder: newField.placeholder,
@@ -418,7 +418,7 @@ export default function FormsRegistrationPage() {
   // Create and add a suggested new field
   const createSuggestedField = (suggestion: NewFieldSuggestion) => {
     const eventField: EventField = {
-      id: `ef-${Date.now()}`,
+      id: `ef-${Date.now()}`,  
       type: suggestion.type,
       label: suggestion.label,
       placeholder: suggestion.placeholder,

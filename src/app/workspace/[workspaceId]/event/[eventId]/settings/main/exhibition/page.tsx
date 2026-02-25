@@ -404,11 +404,11 @@ function ExhibitorProcessTab() {
   }
 
   const handleModuleSelect = (moduleId: string) => {
-    const module = AVAILABLE_MODULES.find(m => m.id === moduleId)
-    if (module) {
+    const mod = AVAILABLE_MODULES.find(m => m.id === moduleId)
+    if (mod) {
       setNewStepModuleId(moduleId)
-      if (!newStepName) setNewStepName(module.name)
-      if (!newStepDescription) setNewStepDescription(module.description)
+      if (!newStepName) setNewStepName(mod.name)
+      if (!newStepDescription) setNewStepDescription(mod.description)
       if (moduleId !== 'terms') setNewStepTerms([])
     }
   }
@@ -732,8 +732,8 @@ function ExhibitorProcessTab() {
   }
 
   const getModuleName = (moduleId: string) => {
-    const module = AVAILABLE_MODULES.find(m => m.id === moduleId)
-    return module?.name || 'Custom'
+    const mod = AVAILABLE_MODULES.find(m => m.id === moduleId)
+    return mod?.name || 'Custom'
   }
 
   return (
@@ -5767,7 +5767,7 @@ function InvoicesTab() {
             <div className="p-4 border-b border-neutral-100 flex items-center justify-between">
               <div>
                 <h3 className="font-semibold text-neutral-950">Invoice Editor</h3>
-                <p className="text-sm text-neutral-500">Customize layout and content for "{editorTemplate.name}"</p>
+                <p className="text-sm text-neutral-500">Customize layout and content for &quot;{editorTemplate.name}&quot;</p>
               </div>
               <button onClick={() => { setIsEditorOpen(false); setEditorTemplate(null) }} className="p-1 text-neutral-400 hover:text-neutral-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

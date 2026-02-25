@@ -57,6 +57,15 @@ const MOCK_NOTICES: Notice[] = [
   },
 ]
 
+const MOCK_COMPANIES: Record<number, Company[]> = {
+  0: [],
+  1: [{ id: '1', name: 'Design House Co.', country: 'South Korea' }],
+  2: [
+    { id: '1', name: 'Design House Co.', country: 'South Korea' },
+    { id: '2', name: 'Nordic Interior', country: 'Sweden' },
+  ],
+}
+
 const sidebarItems = [
   { label: 'Dashboard', href: '', icon: 'dashboard' },
   { label: 'My Profile', href: '/profile', icon: 'profile' },
@@ -69,12 +78,9 @@ export default function MyPage() {
   const eventSlug = params.eventSlug as string
   const basePath = `/events/${eventSlug}`
 
-  // Mock: change this array to test the 3 states
-  // [] = no company, [1] = single, [2+] = multiple
-  const [companies] = useState<Company[]>([
-    { id: '1', name: 'Design House Co.', country: 'South Korea' },
-    { id: '2', name: 'Nordic Interior', country: 'Sweden' },
-  ])
+  // Dev toggle for company count preview
+  const [companyPreset, setCompanyPreset] = useState<0 | 1 | 2>(2)
+  const companies = MOCK_COMPANIES[companyPreset]
 
   const [expandedNotice, setExpandedNotice] = useState<string | null>(null)
 
@@ -124,44 +130,34 @@ export default function MyPage() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-neutral-50">
-      {/* Banner */}
-      <div className="bg-gradient-to-r from-admin-primary-700 via-admin-primary-600 to-admin-primary-500 text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.15c0 .415.336.75.75.75z" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-sm text-white/70 font-medium">Design House</p>
-              <h1 className="text-lg font-bold">Seoul Living Design Fair 2026</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content with Sidebar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-8">
+        <div className="flex gap-6">
           {/* Left Sidebar */}
-          <aside className="w-52 flex-shrink-0 hidden md:block">
-            <nav className="space-y-1 sticky top-24">
-              {sidebarItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={`${basePath}/mypage${item.href}`}
-                  className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                    activeSection === item.href
-                      ? 'text-admin-primary-700 bg-admin-primary-50'
-                      : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100'
-                  }`}
-                >
-                  <SidebarIcon type={item.icon} />
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+          <aside className="w-56 flex-shrink-0 hidden md:block">
+            <div className="card sticky top-24 overflow-hidden">
+              {/* Sidebar Header */}
+              <div className="px-4 py-3 border-b border-neutral-100">
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">My Page</p>
+              </div>
+              {/* Sidebar Nav */}
+              <nav className="p-2">
+                {sidebarItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={`${basePath}/mypage${item.href}`}
+                    className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
+                      activeSection === item.href
+                        ? 'text-admin-primary-700 bg-admin-primary-50'
+                        : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50'
+                    }`}
+                  >
+                    <SidebarIcon type={item.icon} />
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </aside>
 
           {/* Main Content */}
@@ -169,7 +165,6 @@ export default function MyPage() {
             {/* Page Header */}
             <div className="mb-6">
               <h2 className="text-xl font-bold text-neutral-950">My Page</h2>
-              <p className="text-sm text-neutral-500 mt-1">View your participation details for Seoul Living Design Fair 2026</p>
             </div>
 
             {/* Profile Card */}
@@ -200,6 +195,16 @@ export default function MyPage() {
             <div className="card p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-sm font-semibold text-neutral-950">My Company</h2>
+                {/* Dev preview toggle */}
+                <select
+                  value={companyPreset}
+                  onChange={(e) => setCompanyPreset(Number(e.target.value) as 0 | 1 | 2)}
+                  className="text-xs border border-dashed border-neutral-300 rounded px-2 py-1 text-neutral-500 bg-neutral-50 cursor-pointer"
+                >
+                  <option value={0}>0 Companies</option>
+                  <option value={1}>1 Company</option>
+                  <option value={2}>2 Companies</option>
+                </select>
               </div>
 
               {companies.length === 0 ? (

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { Badge } from '@/components/Badge'
@@ -46,9 +46,7 @@ export default function SeriesDetailPage() {
     active: true,
   })
 
-  const availableGroups = useMemo(() => {
-    return allGroups.filter(g => !series.groups.includes(g))
-  }, [series.groups])
+  const availableGroups = allGroups.filter(g => !series.groups.includes(g))
 
   const addGroup = (group: string) => {
     if (group && !series.groups.includes(group)) {
@@ -176,24 +174,22 @@ export default function SeriesDetailPage() {
     }
   }
 
-  const sortedSeriesEvents = useMemo(() => {
-    return [...seriesEvents].sort((a, b) => {
-      let aVal: string
-      let bVal: string
+  const sortedSeriesEvents = [...seriesEvents].sort((a, b) => {
+    let aVal: string
+    let bVal: string
 
-      if (sortField === 'date') {
-        aVal = a.dateSort
-        bVal = b.dateSort
-      } else {
-        aVal = a.status.toLowerCase()
-        bVal = b.status.toLowerCase()
-      }
+    if (sortField === 'date') {
+      aVal = a.dateSort
+      bVal = b.dateSort
+    } else {
+      aVal = a.status.toLowerCase()
+      bVal = b.status.toLowerCase()
+    }
 
-      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1
-      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1
-      return 0
-    })
-  }, [sortField, sortOrder])
+    if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1
+    if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1
+    return 0
+  })
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -470,6 +466,7 @@ export default function SeriesDetailPage() {
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-md overflow-hidden flex-shrink-0">
                           {event.image ? (
+                             
                             <img
                               src={event.image}
                               alt={event.name}

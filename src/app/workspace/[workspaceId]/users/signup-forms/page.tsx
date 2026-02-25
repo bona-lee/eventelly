@@ -606,7 +606,7 @@ export default function MemberSettingsPage() {
                       className="w-4 h-4 rounded border-neutral-300 text-admin-primary-600 focus:ring-admin-primary-500"
                     />
                     <label htmlFor="allow-other-new" className="text-sm text-neutral-950">
-                      Allow "Other" option with text input
+                      Allow &quot;Other&quot; option with text input
                     </label>
                   </div>
                 </div>
@@ -798,7 +798,7 @@ export default function MemberSettingsPage() {
                       className="w-4 h-4 rounded border-neutral-300 text-admin-primary-600 focus:ring-admin-primary-500"
                     />
                     <label htmlFor="allow-other-edit" className="text-sm text-neutral-950">
-                      Allow "Other" option with text input
+                      Allow &quot;Other&quot; option with text input
                     </label>
                   </div>
                 </div>

@@ -43,9 +43,7 @@ export default function MemberDetailPage() {
 
   const [selectedGroup, setSelectedGroup] = useState('')
   const allGroups = ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5']
-  const availableGroups = useMemo(() => {
-    return allGroups.filter(g => !member.groups.includes(g))
-  }, [member.groups])
+  const availableGroups = allGroups.filter(g => !member.groups.includes(g))
 
   const roles = ['Owner', 'Manager', 'Staff']
 
@@ -161,6 +159,7 @@ export default function MemberDetailPage() {
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             {member.avatar ? (
+               
               <img src={member.avatar} alt={member.name} className="w-16 h-16 rounded-lg object-cover" />
             ) : (
               <div className="w-16 h-16 rounded-lg bg-admin-primary-100 flex items-center justify-center text-admin-primary-700 font-bold text-xl">

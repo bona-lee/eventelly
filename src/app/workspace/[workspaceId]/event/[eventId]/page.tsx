@@ -91,7 +91,7 @@ export default function EventHomePage() {
     <div>
       {/* Greeting */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-neutral-950">Hi Bona, let's manage your event</h1>
+        <h1 className="text-2xl font-bold text-neutral-950">Hi Bona, let&apos;s manage your event</h1>
         <p className="mt-1 text-sm text-neutral-500">Seoul Living Design Fair 2026</p>
       </div>
 

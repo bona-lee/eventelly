@@ -61,7 +61,8 @@ export default function PaymentMethodsPage() {
   const handleAddCard = (e: React.FormEvent) => {
     e.preventDefault();
     const newMethod = {
-      id: Date.now(),
+      id: Date.now(),  
+
       type: 'card',
       brand: detectCardBrand(newCard.cardNumber),
       last4: newCard.cardNumber.slice(-4),

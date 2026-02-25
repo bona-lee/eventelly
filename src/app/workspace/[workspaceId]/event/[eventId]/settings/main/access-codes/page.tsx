@@ -740,9 +740,9 @@ function AllocationTab() {
 
     const newCodes: AdminCode[] = []
     for (let i = 0; i < adminCodeForm.quantity; i++) {
-      const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase()
+      const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase()  
       newCodes.push({
-        id: `code-${Date.now()}-${i}`,
+        id: `code-${Date.now()}-${i}`,  
         code: `${codeType.codePrefix}-2026-${randomPart}`,
         codeTypeId: codeType.id,
         codeTypeName: codeType.name,
@@ -754,7 +754,7 @@ function AllocationTab() {
         recipientEmail: adminCodeForm.recipientEmail || undefined,
         status: 'active',
         expiresAt: codeType.validityDays
-          ? new Date(Date.now() + codeType.validityDays * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+          ? new Date(Date.now() + codeType.validityDays * 24 * 60 * 60 * 1000).toISOString().split('T')[0]  
           : '2026-03-18',
       })
     }

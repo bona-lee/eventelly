@@ -26,7 +26,7 @@ const compactColors = {
 
 // ── CATEGORY (decorative) ──────────────────────────────────────────
 // Raw Tailwind palette for user-defined categories.  Pill shape.
-// eslint-disable-next-line custom/no-raw-tailwind-colors -- decorative category palette
+/* eslint-disable custom/no-raw-tailwind-colors -- decorative category palette */
 const categoryColors = {
   blue:    'bg-blue-50 text-blue-700',
   purple:  'bg-purple-50 text-purple-700',
@@ -37,6 +37,7 @@ const categoryColors = {
   pink:    'bg-pink-50 text-pink-700',
   neutral: 'bg-neutral-100 text-neutral-700',
 } as const
+/* eslint-enable custom/no-raw-tailwind-colors */
 
 // ── Types ──────────────────────────────────────────────────────────
 export type StatusColor   = keyof typeof statusColors

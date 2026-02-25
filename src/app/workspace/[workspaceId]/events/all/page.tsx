@@ -267,30 +267,28 @@ export default function EventsPage() {
     { id: 'elegant', name: 'Elegant', description: 'Sophisticated and premium feel', color: 'bg-gradient-to-br from-amber-400 to-orange-600' },
   ]
 
-  const filteredFilterSeriesList = useMemo(() => {
+  const filteredFilterSeriesList = (() => {
     if (!filterSeriesSearch) return seriesList
     const search = filterSeriesSearch.toLowerCase()
     return seriesList.filter(s =>
       s.name.toLowerCase().includes(search) || s.id.toLowerCase().includes(search)
     )
-  }, [filterSeriesSearch])
+  })()
 
-  const filteredSeriesList = useMemo(() => {
+  const filteredSeriesList = (() => {
     if (!seriesSearch) return seriesList
     const search = seriesSearch.toLowerCase()
     return seriesList.filter(s =>
       s.name.toLowerCase().includes(search) || s.id.toLowerCase().includes(search)
     )
-  }, [seriesSearch])
+  })()
 
-  const allFilteredEvents = useMemo(() => {
-    return events.filter(event => {
-      const matchesSearch = event.name.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesSeries = !filterSeries || event.seriesId === filterSeries
-      const matchesStatus = !filterStatus || event.status === filterStatus
-      return matchesSearch && matchesSeries && matchesStatus
-    })
-  }, [searchQuery, filterSeries, filterStatus])
+  const allFilteredEvents = events.filter(event => {
+    const matchesSearch = event.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesSeries = !filterSeries || event.seriesId === filterSeries
+    const matchesStatus = !filterStatus || event.status === filterStatus
+    return matchesSearch && matchesSeries && matchesStatus
+  })
 
   const sortedEvents = useMemo(() => {
     return [...allFilteredEvents].sort((a, b) => {
@@ -336,9 +334,8 @@ export default function EventsPage() {
   }, [sortedEvents, currentPage])
 
   // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [searchQuery, filterSeries, filterStatus])
+   
+  useEffect(() => { setCurrentPage(1) }, [searchQuery, filterSeries, filterStatus])
 
   const toggleSort = (field: string) => {
     if (sortField === field) {
@@ -400,13 +397,9 @@ export default function EventsPage() {
     return lang?.name || code
   }
 
-  const selectedLanguages = useMemo(() => {
-    return availableLanguages.filter(lang => newEvent.languages.includes(lang.code))
-  }, [newEvent.languages])
+  const selectedLanguages = availableLanguages.filter(lang => newEvent.languages.includes(lang.code))
 
-  const selectedCurrencies = useMemo(() => {
-    return availableCurrencies.filter(curr => newEvent.currencies.includes(curr.code))
-  }, [newEvent.currencies])
+  const selectedCurrencies = availableCurrencies.filter(curr => newEvent.currencies.includes(curr.code))
 
   const canProceed = useMemo(() => {
     switch (currentStep) {
@@ -568,6 +561,7 @@ export default function EventsPage() {
   }
 
   // Auto-generate subdomain from event name
+   
   useEffect(() => {
     if (newEvent.name && !newEvent.subdomain) {
       const subdomain = newEvent.name
@@ -876,6 +870,7 @@ export default function EventsPage() {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-md overflow-hidden flex-shrink-0 bg-neutral-100">
                       {event.icon ? (
+                         
                         <img
                           src={event.icon}
                           alt={event.name}
@@ -1288,6 +1283,7 @@ export default function EventsPage() {
                     >
                       {newEvent.iconPreview ? (
                         <div className="flex justify-center mb-3">
+                          { }
                           <img src={newEvent.iconPreview} alt="Icon preview" className="w-20 h-20 rounded-md object-contain bg-neutral-50" />
                         </div>
                       ) : (
@@ -1313,6 +1309,7 @@ export default function EventsPage() {
                     >
                       {newEvent.posterPreview ? (
                         <div className="flex justify-center mb-3">
+                          { }
                           <img src={newEvent.posterPreview} alt="Poster preview" className="h-32 rounded-md object-contain bg-neutral-50" />
                         </div>
                       ) : (
