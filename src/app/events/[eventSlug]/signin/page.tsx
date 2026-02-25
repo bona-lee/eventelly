@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export default function EventLoginPage() {
+export default function EventSignInPage() {
   const params = useParams()
   const router = useRouter()
   const eventSlug = params.eventSlug as string
@@ -14,9 +14,9 @@ export default function EventLoginPage() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement actual login logic
+    // TODO: Implement actual sign-in logic
     router.push(`${basePath}/mypage`)
   }
 
@@ -25,18 +25,14 @@ export default function EventLoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center mx-auto mb-4">
-            <span className="text-white text-lg font-bold">E</span>
-          </div>
-          <h1 className="text-2xl font-bold text-neutral-950 mb-2">로그인</h1>
-          <p className="text-sm text-neutral-500">서울리빙디자인페어 2026에 오신 것을 환영합니다</p>
+          <h1 className="text-2xl font-bold text-neutral-950 mb-2">Sign In</h1>
+          <p className="text-sm text-neutral-500">Welcome to Seoul Living Design Fair 2026</p>
         </div>
 
-        {/* Login Form */}
         <div className="card p-6">
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSignIn} className="space-y-4">
             <div>
-              <label htmlFor="email" className="label">이메일</label>
+              <label htmlFor="email" className="label">Email</label>
               <input
                 id="email"
                 type="email"
@@ -49,13 +45,21 @@ export default function EventLoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="label">비밀번호</label>
+              <div className="flex items-center justify-between mb-1">
+                <label htmlFor="password" className="label mb-0">Password</label>
+                <Link
+                  href={`${basePath}/password`}
+                  className="text-xs text-admin-primary-700 hover:text-admin-primary-800 font-medium transition-colors"
+                >
+                  Forgot password?
+                </Link>
+              </div>
               <div className="relative">
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   className="input pr-10"
-                  placeholder="비밀번호를 입력하세요"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -83,42 +87,29 @@ export default function EventLoginPage() {
               type="submit"
               className="btn btn-primary w-full py-3"
             >
-              로그인
+              Sign In
             </button>
           </form>
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-neutral-200" />
-            <span className="text-xs text-neutral-400">또는</span>
+            <span className="text-xs text-neutral-400">or</span>
             <div className="flex-1 h-px bg-neutral-200" />
           </div>
 
           {/* Sign up link */}
           <div className="text-center">
             <p className="text-sm text-neutral-500">
-              아직 계정이 없으신가요?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href={`${basePath}/signup`}
                 className="text-admin-primary-700 font-semibold hover:text-admin-primary-800 transition-colors"
               >
-                회원가입
+                Sign Up
               </Link>
             </p>
           </div>
-        </div>
-
-        {/* Back to event */}
-        <div className="text-center mt-6">
-          <Link
-            href={basePath}
-            className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors inline-flex items-center gap-1"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
-            이벤트 페이지로 돌아가기
-          </Link>
         </div>
       </div>
     </div>

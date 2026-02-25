@@ -442,8 +442,8 @@ export default function ExhibitorsPage() {
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-neutral-950">Exhibitors</h1>
-            <p className="mt-1 text-sm text-neutral-500">Unified exhibitor accounts registered in this workspace</p>
+            <h1 className="text-2xl font-bold text-neutral-950">Companies</h1>
+            <p className="mt-1 text-sm text-neutral-500">Unified company accounts registered in this workspace</p>
           </div>
           <div className="relative">
             <button
@@ -453,7 +453,7 @@ export default function ExhibitorsPage() {
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              Add Exhibitor
+              Add Company
             </button>
             {showCreateModal && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-neutral-200 py-2 z-10">
@@ -483,7 +483,7 @@ export default function ExhibitorsPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="card p-4">
-            <p className="text-sm text-neutral-500">Total Exhibitors</p>
+            <p className="text-sm text-neutral-500">Total Companies</p>
             <p className="text-2xl font-bold text-neutral-950 mt-1">{exhibitors.length}</p>
           </div>
           <div className="card p-4">
@@ -509,7 +509,7 @@ export default function ExhibitorsPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by company, email, representative..."
+                placeholder="Search by company, email..."
                 className="input"
               />
             </div>
@@ -672,7 +672,8 @@ export default function ExhibitorsPage() {
             <thead>
               <tr>
                 <th>Company</th>
-                <th>Representative</th>
+                <th>Contacts</th>
+                <th>Registration No.</th>
                 <th>Industry</th>
                 <th>Country</th>
                 <th>Events</th>
@@ -690,19 +691,25 @@ export default function ExhibitorsPage() {
                     <div className="flex items-center gap-3">
                       {/* eslint-disable-next-line custom/no-raw-tailwind-colors -- decorative company avatar */}
                       <div className="w-10 h-10 rounded-md bg-blue-100 flex items-center justify-center text-blue-700 font-semibold text-sm">
-                        {exhibitor.companyName.charAt(0)}
+                        {(exhibitor.companyNameEn || exhibitor.companyName).charAt(0)}
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-neutral-950">{exhibitor.companyName}</p>
-                        <p className="text-xs text-neutral-500">{exhibitor.companyNameEn}</p>
-                      </div>
+                      <p className="text-sm font-medium text-neutral-950">{exhibitor.companyNameEn || exhibitor.companyName}</p>
                     </div>
                   </td>
                   <td>
-                    <div>
-                      <p className="text-sm text-neutral-950">{exhibitor.representative}</p>
-                      <p className="text-xs text-neutral-500">{exhibitor.email}</p>
-                    </div>
+                    {exhibitor.contacts.length > 0 ? (
+                      <span className="text-sm text-neutral-950">
+                        {exhibitor.contacts[0].name}
+                        {exhibitor.contacts.length > 1 && (
+                          <span className="text-neutral-400 ml-1">+{exhibitor.contacts.length - 1}</span>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="text-sm text-neutral-400">—</span>
+                    )}
+                  </td>
+                  <td>
+                    <span className="text-sm text-neutral-600">{exhibitor.businessNumber}</span>
                   </td>
                   <td>
                     <span className="text-sm text-neutral-600">{exhibitor.industry}</span>

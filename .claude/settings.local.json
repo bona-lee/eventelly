@@ -41,7 +41,10 @@
       "Bash(npx tailwindcss:*)",
       "Bash(Select-String -Pattern \"text-micro\" -Context 0,3)",
       "Bash(powershell:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(head:*)",
+      "Bash(sh:*)",
+      "Bash(xxd:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\yhlee\\Desktop\\myclaude\\eventelly",

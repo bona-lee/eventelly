@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const navItems = [
@@ -13,10 +13,13 @@ const navItems = [
 
 export default function EventPublicHeader({ eventSlug }: { eventSlug: string }) {
   const pathname = usePathname()
+  const router = useRouter()
   const basePath = `/events/${eventSlug}`
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const isAuthPage = pathname.includes('/login') || pathname.includes('/signup')
+  // Mock: toggle this to test authenticated vs unauthenticated state
+  const [isAuthenticated] = useState(true)
+
   const isMyPage = pathname.includes('/mypage')
 
   const isActive = (href: string) => {
@@ -34,7 +37,7 @@ export default function EventPublicHeader({ eventSlug }: { eventSlug: string }) 
               <span className="text-white text-sm font-bold">E</span>
             </div>
             <span className="text-sm font-semibold text-neutral-950 hidden sm:block">
-              서울리빙디자인페어
+              SLDF 2026
             </span>
           </Link>
 
@@ -57,24 +60,36 @@ export default function EventPublicHeader({ eventSlug }: { eventSlug: string }) 
 
           {/* Right Section */}
           <div className="flex items-center gap-3">
-            {isMyPage ? (
+            {isAuthenticated ? (
+              <>
+                <Link
+                  href={`${basePath}/mypage`}
+                  className="btn btn-ghost text-sm"
+                >
+                  <svg className="w-5 h-5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                  My Page
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    // TODO: Implement actual sign-out logic
+                    router.push(`${basePath}/signin`)
+                  }}
+                  className="btn btn-ghost text-sm text-neutral-500"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
               <Link
-                href={`${basePath}/mypage`}
-                className="btn btn-ghost text-sm"
-              >
-                <svg className="w-5 h-5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-                My Page
-              </Link>
-            ) : !isAuthPage ? (
-              <Link
-                href={`${basePath}/login`}
+                href={`${basePath}/signin`}
                 className="btn btn-primary text-sm"
               >
-                Login
+                Sign In
               </Link>
-            ) : null}
+            )}
 
             {/* Mobile menu button */}
             <button

@@ -24,7 +24,6 @@ export default [
       ],
       'react-hooks/static-components': 'warn',
       'react-hooks/set-state-in-effect': 'warn',
-      'react-compiler/react-compiler': 'warn',
     },
   },
 ]
